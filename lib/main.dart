@@ -7,12 +7,12 @@ void main() => runApp(new MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
+    return MaterialApp(
       title: 'SportQuest',
-      theme: new ThemeData(
+      theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: new HomePage(title: 'SportQuest Demo Home Page'),
+      home: HomePage(title: 'SportQuest Demo Home Page'),
     );
   }
 }

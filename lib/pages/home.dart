@@ -10,24 +10,75 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // int _counter = 0;
+  int _currentIndex = 0;
 
-  // void _incrementCounter() {
-  //   setState(() {
-  //     _counter++;
-  //   });
-  // }
+  void _indexChange(int i) {
+    setState(() {
+      _currentIndex = i;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text(widget.title),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
       ),
-      body: new Center(
-        child: const Text('Howdy')
-        // child: const Text('$_counter')
-      )
+      body: Stack(
+        children: <Widget>[
+          Offstage(
+            offstage: _currentIndex != 0,
+            child: TickerMode(
+              enabled: _currentIndex == 0,
+              child: const Text('Projects')
+            )
+          ),
+          Offstage(
+            offstage: _currentIndex != 1,
+            child: TickerMode(
+              enabled: _currentIndex == 1,
+              child: const Text('Forms')
+            )
+          ),
+          Offstage(
+            offstage: _currentIndex != 2,
+            child: TickerMode(
+              enabled: _currentIndex == 2,
+              child: const Text('Fundraising')
+            )
+          ),
+          Offstage(
+            offstage: _currentIndex != 3,
+            child: TickerMode(
+              enabled: _currentIndex == 3,
+              child: const Text('Photos')
+            )
+          ),
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: _indexChange,
+        currentIndex: _currentIndex,
+        type: BottomNavigationBarType.fixed,
+        items: [
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.language),
+            title: const Text('Projects'),
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.list),
+            title: const Text('Forms'),
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.local_activity),
+            title: const Text('Fundraising'),
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.camera_alt),
+            title: const Text('Photos'),
+          ),
+        ],
+      ),
     );
   }
 }
